@@ -25,12 +25,10 @@ libraryDependencies  ++= Seq(
   // be compatible with the Apache License. No GPL code, as best I know.
   "org.scalanlp" %% "breeze-natives" % "2.1.0",
 
-  // The visualization library is distributed separately as well.
   // It depends on LGPL code
   "org.scalanlp" %% "breeze-viz" % "2.1.0",
-  // BLAS implementation
   "com.github.fommil.netlib" % "all" % "1.1.2" ,
-  
+
   "ch.qos.logback" % "logback-core" % "1.2.3", // version might be different, check the latest
   "ch.qos.logback" % "logback-classic" % "1.2.3" // version might be different, check the latest
 )

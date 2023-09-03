@@ -4,7 +4,7 @@ import breeze.linalg.*
 import breeze.numerics.*
 import doomsday.core._
 
-object Test {
+object Test1 {
   def main(args: Array[String]): Unit = {
     val x = new Var(DenseMatrix(
       (1.0, 2.0, 3.0),
@@ -23,6 +23,18 @@ object Test {
     print(y.data)
     y.backward()
     print(a.grad.get)
+
+    val z0 = x * x + 2
+    x.cleargrad()
+    z0.backward()
+    println(s"z0 = ${z0}")
+    print(x.grad.get, x.generation)
+
+    val z1 = z0 * 2
+    z1.backward()
+    println(s"z1 = ${z1}")
+    print(x.grad.get, x.generation)
+
 
 
   }

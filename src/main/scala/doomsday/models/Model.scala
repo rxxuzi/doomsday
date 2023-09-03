@@ -1,4 +1,4 @@
-package doomsday.model
+package doomsday.models
 
 abstract class Model {
 

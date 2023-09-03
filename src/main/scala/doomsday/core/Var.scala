@@ -1,6 +1,7 @@
 package doomsday.core
 import breeze.linalg._
 import doomsday.core._
+import doomsday.core.Config
 import doomsday.function.{Function => F}
 
 final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) {
