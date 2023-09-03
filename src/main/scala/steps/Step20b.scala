@@ -103,7 +103,7 @@ object Step20b {
     }
 
     override def backward(gys: DenseMatrix[Double]*): Seq[DenseMatrix[Double]] = {
-      val (x0, x1) = (inputs(0).data, inputs(1).data)
+      val (x0, x1) = (inputs.head.data, inputs(1).data)
       if (x0.rows == gys.head.rows && x0.cols == gys.head.cols) {
         Seq(gys.head *:* x1, gys.head *:* x0)
       } else {

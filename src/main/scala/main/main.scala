@@ -1,3 +1,5 @@
+package main
+
 import breeze.linalg._
 import breeze.numerics._
 import breeze.stats._

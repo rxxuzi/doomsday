@@ -1,6 +1,9 @@
+package sample
+
 import scala.collection.mutable.ArrayBuffer
 import breeze.linalg.*
 import spire.math.Quaternion
+
 object MatrixSample {
   def main(args: Array[String]): Unit = {
 
