@@ -18,7 +18,8 @@ implicit class VarOps(v: Var) {
   def *(other: Var): Var = Mul(v, other)
   def -(other: Var): Var = Sub(v, other)
   def /(other: Var): Var = Div(v, other)
-  def ^(other: Int): Var = Pow(v, other)
+  def ^(other: Double): Var = Pow(v, other)
+//  def ^(other: Int): Var = Pow(v, other)
 }
 
 implicit class NegOps(v: Var) {

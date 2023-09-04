@@ -5,9 +5,13 @@
 <strong><em>Table of Contents</em></strong>
 </summary>
 
-- Defect
-- Error
-- Examples
-- Setup and installation
+- [Bugs / Defect](bugs)
+- [Error](errors)
+- [Examples](examples)
+- [Math](math)
+- [Setup](setup)
+- [Tests](tests)
+    - [function](tests/funcs)
+    - [structure](tests/structure)
 
 </details>

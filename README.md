@@ -1,9 +1,9 @@
-<p align="center"><a href=".docs/pics/DOOMSDAY.svg" target="_blank" rel="noopener noreferrer"><img width="700" src=".docs/pics/DOOMSDAY.svg" alt="Doomsday logo"></a></p>
+<p align="center"><a href=".docs/pics/DOOMSDAY.svg" target="_blank" rel="noopener noreferrer"><img src=".docs/pics/DOOMSDAY.svg" alt="Doomsday logo"></a></p>
 
-<p align="center">
-<img alt="MIT License Badge" src="https://img.shields.io/badge/license-MIT-blue"/>
-<img alt="MIT License Badge" src="https://img.shields.io/badge/author-Rxxuzi-g"/>
-</p>
+
+![MIT License Badge](https://img.shields.io/badge/license-MIT-blue)
+[![Scala CI](https://github.com/rxxuzi/doomsday/actions/workflows/scala.yml/badge.svg)](https://github.com/rxxuzi/doomsday/actions/workflows/scala.yml)
+
 
 ## Introduction
 

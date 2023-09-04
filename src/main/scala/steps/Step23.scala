@@ -7,13 +7,14 @@ import doomsday.core._
 object Step23 {
   def main(args: Array[String]): Unit = {
     val x = Var(DenseMatrix(1d))
-    val y = Var(DenseMatrix(2d))
-
-    def f(x : Var , y : Var) = {
-      x + 2 * y
+    val y = Var(DenseMatrix(1d))
+    def f(x: Var, y: Var): Var = {
+      x * x * x * y + 5
     }
-
-    println(s"f(x,y) = ${f(x,y)}")
-    
+    val z = f(x,y)
+    println(s"z.data = ${z.data}")
+    z.backward()
+    println(s"x.grad = ${x.grad}")
+    println(s"y.grad = ${y.grad}")
   }
 }
