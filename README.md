@@ -1,7 +1,10 @@
 <p align="center"><a href=".docs/pics/DOOMSDAY.svg" target="_blank" rel="noopener noreferrer"><img src=".docs/pics/DOOMSDAY.svg" alt="Doomsday logo"></a></p>
 
 
-![MIT License Badge](https://img.shields.io/badge/license-MIT-blue)
+![MIT License Badge](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-alpha-blue)
+![Author](https://img.shields.io/badge/author-rxxuzi-70f)
+
 [![Scala CI](https://github.com/rxxuzi/doomsday/actions/workflows/scala.yml/badge.svg)](https://github.com/rxxuzi/doomsday/actions/workflows/scala.yml)
 
 
@@ -52,10 +55,20 @@ import doomsday.dataset._
 import doomsday.optimizers._
 ~~~
 
+Sample code can be found in [example](.docs/examples).
+
 You can now utilize all the functionalities provided by Doomsday.
 
 
 ## Features
+
+- **Flexibility**: Design and train custom neural network architectures tailored to your needs.
+- **Optimizers**: Multiple optimization algorithms available like SGD, Adam, RMSprop, etc.
+- **Loss Functions**: A variety of loss functions to choose from, including MSE, Cross-Entropy, and more.
+- **Regularization Techniques**: Support for techniques like Dropout, Batch Normalization, and L1/L2 regularization.
+- **Datasets**: Built-in utilities to handle and preprocess datasets for machine learning tasks.
+- **Model Evaluation**: Tools for evaluating model performance using metrics like accuracy, precision, recall, etc.
+- **Functional API**: Leverage the power of Scala's functional programming capabilities for more expressive model design.
 
 ## Documentation
 
