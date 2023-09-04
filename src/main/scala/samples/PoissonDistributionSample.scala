@@ -1,4 +1,4 @@
-package sample
+package samples
 import breeze.stats.distributions.Poisson
 import breeze.stats.distributions.{Poisson, Rand}
 import breeze.stats.distributions.Rand.VariableSeed.randBasis

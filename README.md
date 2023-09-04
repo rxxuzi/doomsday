@@ -59,7 +59,7 @@ You can now utilize all the functionalities provided by Doomsday.
 
 ## Documentation
 
-For detailed usage instructions, troubleshooting, and more, check out our documentation in the [.docs folder.
+For detailed usage instructions, troubleshooting, and more, check out our documentation in the **[document](.docs)** folder.
 
 ## License
 

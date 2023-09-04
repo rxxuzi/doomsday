@@ -1,4 +1,4 @@
-package steps
+package step
 
 import breeze.linalg.DenseMatrix
 import doomsday.core.{Var, VarOps}

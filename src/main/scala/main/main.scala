@@ -7,6 +7,7 @@ import breeze.plot._
 import scala.util.Random
 import scala.io.StdIn._
 import scala.math._
+import doomsday._
 @main
 def main(): Unit = {
   println("Hello world!")

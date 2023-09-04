@@ -1,4 +1,4 @@
-package sample
+package samples
 import breeze.linalg.*
 import breeze.plot._
 import breeze.plot.Figure

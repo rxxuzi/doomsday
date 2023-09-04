@@ -1,17 +1,19 @@
-package steps
+package step
 
 import breeze.linalg._
 import breeze.numerics._
 
-object Step15 {
+object Step14 {
 
   class Var(var data: DenseVector[Double]) {
     var grad: Option[DenseVector[Double]] = None
     var creator: Option[Function] = None
 
-    def cleanGrad(): Unit = grad = None
+    def cleangrad(): Unit = {
+      grad = None
+    }
 
-    def setCreator(func: Function): Unit = {
+    def set_creator(func: Function): Unit = {
       creator = Some(func)
     }
 
@@ -53,7 +55,7 @@ object Step15 {
       val ys = forward(xs: _*)
 
       val outputs = ys.map(y => new Var(y))
-      outputs.foreach(_.setCreator(this))
+      outputs.foreach(_.set_creator(this))
 
       this.outputs = outputs
       outputs.head
@@ -70,10 +72,6 @@ object Step15 {
     }
   }
 
-  object Add {
-    def apply(x: Var, y: Var): Var = (new Add).apply(x, y)
-  }
-
   class Square extends Function {
     override def forward(xs: DenseVector[Double]*): Seq[DenseVector[Double]] = {
       Seq(xs.head.map(scalar => scalar * scalar))
@@ -84,22 +82,25 @@ object Step15 {
     }
   }
 
-  object Square {
-    def apply(x: Var): Var = (new Square).apply(x)
+  object Operations {
+    def add(x: Var, y: Var): Var = (new Add).apply(x, y)
+
+    def square(x: Var): Var = (new Square).apply(x)
   }
+
+  import Operations._
 
   def main(args: Array[String]): Unit = {
     val x = new Var(DenseVector(2.0))
 
-    var y = Add(x, x)
+    var y = add(x, x)
     y.backward()
     println(x.grad.get)
 
-    x.cleanGrad()
+    x.cleangrad()
 
-    y = Add(Square(x), Square(x))
+    y = add(square(x), square(x))
     y.backward()
     println(x.grad.get)
   }
 }
-

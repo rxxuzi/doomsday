@@ -1,4 +1,4 @@
-package object steps {
+package object step {
   import breeze.linalg.*
   import breeze.numerics.constants.*
   import doomsday.core._

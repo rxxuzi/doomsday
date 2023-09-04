@@ -1,10 +1,10 @@
-package steps
+package step
 
 import breeze.linalg._
-//import breeze.numerics._
-import breeze.numerics.{exp => breezeExp}
+import breeze.numerics._
 
-object Step9 {
+object Step7 {
+
   class Var(var data: DenseVector[Double]) {
     var grad: DenseVector[Double] = _
     var creator: Function = _
@@ -14,25 +14,13 @@ object Step9 {
     }
 
     def backward(): Unit = {
-      if (this.grad == null) {
-        this.grad = DenseVector.ones[Double](data.length)
-      }
-
-      var funcs: List[Function] = List(this.creator)
-      while (funcs.nonEmpty) {
-        val f = funcs.head
-        funcs = funcs.tail
+      val f = this.creator
+      if (f != null) {
         val x = f.input
         x.grad = f.backward(this.grad)
-        if (x.creator != null) {
-          funcs = x.creator :: funcs
-        }
+        x.backward()
       }
     }
-  }
-
-  def asArray(y: Double): DenseVector[Double] = {
-    DenseVector(y)
   }
 
   trait Function {
@@ -42,7 +30,7 @@ object Step9 {
     def apply(input: Var): Var = {
       this.input = input
       val y = forward(input.data)
-      val output = new Var(asArray(y(0)))
+      val output = new Var(y)
       output.setCreator(this)
       this.output = output
       output
@@ -53,39 +41,42 @@ object Step9 {
     def backward(gy: DenseVector[Double]): DenseVector[Double]
   }
 
-  final class Square extends Function {
+  class Square extends Function {
     override def forward(x: DenseVector[Double]): DenseVector[Double] = x *:* x
 
     override def backward(gy: DenseVector[Double]): DenseVector[Double] = {
-      val gx = (DenseVector.fill(input.data.length)(2.0) *:* input.data) *:* gy
+      val gx = 2.0 *:* input.data *:* gy
       gx
     }
   }
 
   class Exp extends Function {
-    override def forward(x: DenseVector[Double]): DenseVector[Double] = breezeExp(x)
+    override def forward(x: DenseVector[Double]): DenseVector[Double] = exp(x)
 
     override def backward(gy: DenseVector[Double]): DenseVector[Double] = {
-      val gx = breezeExp(input.data) *:* gy
+      val gx = exp(input.data) *:* gy
       gx
     }
   }
 
-  private def square(x: Var): Var = {
-    new Square()(x)
-  }
-
-  def exp(x: Var): Var = {
-    new Exp()(x)
-  }
-
   def main(args: Array[String]): Unit = {
+    val A = new Square()
+    val B = new Exp()
+    val C = new Square()
     val x = new Var(DenseVector(0.5))
-    val y = square(exp(square(x)))
-    println(s"y is ${y.data}")
+    val a = A(x)
+    val b = B(a)
+    val y = C(b)
+
+    assert(y.creator == C)
+    assert(y.creator.input == b)
+    assert(y.creator.input.creator == B)
+    assert(y.creator.input.creator.input == a)
+    assert(y.creator.input.creator.input.creator == A)
+    assert(y.creator.input.creator.input.creator.input == x)
+
+    y.grad = DenseVector(1.0)
     y.backward()
-    println(s"x.grad is ${x.grad}")
+    println(x.grad)
   }
 }
-
-

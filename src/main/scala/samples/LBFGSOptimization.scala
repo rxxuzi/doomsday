@@ -1,4 +1,4 @@
-package sample
+package samples
 
 import breeze.linalg._
 import breeze.numerics._

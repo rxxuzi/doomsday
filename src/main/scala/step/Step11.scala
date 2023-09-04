@@ -1,4 +1,4 @@
-package steps
+package step
 
 import breeze.linalg._
 import breeze.numerics._

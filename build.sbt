@@ -29,6 +29,6 @@ libraryDependencies  ++= Seq(
   "org.scalanlp" %% "breeze-viz" % "2.1.0",
   "com.github.fommil.netlib" % "all" % "1.1.2" ,
 
-  "ch.qos.logback" % "logback-core" % "1.2.3", // version might be different, check the latest
-  "ch.qos.logback" % "logback-classic" % "1.2.3" // version might be different, check the latest
+  "ch.qos.logback" % "logback-core" % "1.2.3", 
+  "ch.qos.logback" % "logback-classic" % "1.2.3" 
 )

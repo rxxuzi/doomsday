@@ -1,4 +1,4 @@
-package sample
+package samples
 
 import scala.collection.mutable.ArrayBuffer
 import breeze.linalg.*
