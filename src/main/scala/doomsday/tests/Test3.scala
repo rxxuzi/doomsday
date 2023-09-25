@@ -14,14 +14,14 @@ object Test3 {
     // 行列 と スカラー
     val y = (x ^ 2) + x * 2 + 2
 
-    y.backward()
+    y.bwd()
     println(s"x.data = \n${x.data}")
     println(s"y.data = \n${y.data}")
     println(s"x.grad = \n${x.grad.get}")
 
     x.cleargrad()
     val z = x * x
-    z.backward()
+    z.bwd()
     println(s"x.grad = \n${x.gradient}")
 
     println(s"det x = \n${x.det.data}")

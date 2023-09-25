@@ -1,25 +1,24 @@
-package step
-
+package samples
 import doomsday.core._
 import breeze.linalg._
 import breeze.numerics.abs
 import breeze.numerics.constants.*
 import doomsday.function.Function as F
 import breeze.linalg.DenseMatrix as DM
-object Step30 {
+object Sample {
   def main(args: Array[String]): Unit = {
+
     def f(n: Var): Var = {
-      (n ^ 4) - 2 * (n ^ 2)
+      (n ^ 2) + 2 * n
     }
 
-    var x = Var(DM(2.0))
-    val iters = 10
-    for (i <- 0 until iters) {
-      println(s"i = ${i} , x = ${x.data}")
-      val y = f(x)
-      x.cleargrad()
-      y.bwd()
-      x.data -= 1.0 * x.grad.get
-    }
+    val x = Var(DM(2.0))
+    val y = f(x)
+
+    x.cleargrad()
+    y.bwd()
+    println(s"y.data = ${y.data}")
+    println(s"x.grad = ${x.grad.get}")
+
   }
 }

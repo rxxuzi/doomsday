@@ -21,17 +21,17 @@ object Test1 {
 
     val y = a^2
     print(y.data)
-    y.backward()
+    y.bwd()
     print(a.grad.get)
 
     val z0 = x * x + 2
     x.cleargrad()
-    z0.backward()
+    z0.bwd()
     println(s"z0 = ${z0}")
     print(x.grad.get, x.generation)
 
     val z1 = z0 * 2
-    z1.backward()
+    z1.bwd()
     println(s"z1 = ${z1}")
     print(x.grad.get, x.generation)
 

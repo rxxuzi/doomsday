@@ -16,7 +16,7 @@ object Test4 {
 
     println(x.data)
     val y = Function.sin(x)
-    y.backward()
+    y.bwd()
     println(s"y.data = \n ${y.data}")
     println(s"x.grad = \n${x.grad.get}")
   }

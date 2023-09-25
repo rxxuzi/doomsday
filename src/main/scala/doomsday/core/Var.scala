@@ -32,7 +32,10 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
 
   def cleargrad() : Unit = this.grad = None
 
-  def backward(retainGrad: Boolean = false): Unit = {
+  def bwd(retainGrad: Boolean = false): Unit = {
+    /**
+     * Backward Function
+     */
     if (grad.isEmpty) grad = Some(DenseMatrix.ones[Double](data.rows, data.cols))
 
     var funcs: List[Function] = List()

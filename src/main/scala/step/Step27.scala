@@ -21,7 +21,7 @@ object Step27 {
   def main(args: Array[String]): Unit = {
     val x = Var(DenseMatrix(Pi/3))
     val y = F.sin(x)
-    y.backward()
+    y.bwd()
 
     println("f = sin(x) , x = pi/3")
     println(s"f(x)  = ${y.data}")

@@ -13,7 +13,7 @@ object Step23 {
     }
     val z = f(x,y)
     println(s"z.data = ${z.data}")
-    z.backward()
+    z.bwd()
     println(s"x.grad = ${x.grad.get}")
     println(s"y.grad = ${y.grad.get}")
   }
