@@ -9,6 +9,12 @@ abstract class Function {
   def forward(xs: DenseMatrix[Double]*): Seq[DenseMatrix[Double]]
   def backward(gys: DenseMatrix[Double]*): Seq[DenseMatrix[Double]]
 
+  def backwardWithGraph(gys: DenseMatrix[Double]*): Seq[Var] = {
+    val gxs = backward(gys: _*)
+    gxs.map(gx => new Var(gx)) // Save the derivative result as a new Var instance
+  }
+
+
   def apply(inputs: Var*): Var = {
     this.inputs = inputs
     val xs = inputs.map(_.data)

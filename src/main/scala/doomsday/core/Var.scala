@@ -1,9 +1,15 @@
 package doomsday.core
+
 import breeze.linalg._
 import doomsday.core._
 import doomsday.core.Config
 import doomsday.function.{Function => F}
 
+/**
+ * 
+ * @param data 行列
+ * @param name 名前
+ */
 final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) {
 
   var grad: Option[DenseMatrix[Double]] = None
@@ -14,9 +20,7 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
   def gradient: DenseMatrix[Double] = if(grad.isDefined) grad.get else null
 
   def scalarValue: Double = {
-    if (!isScalar) {
-      throw new IllegalStateException("Var is not a scalar")
-    }
+    if (!isScalar) throw new IllegalStateException("Var is not a scalar")
     data.valueAt(0, 0)
   }
 
@@ -32,10 +36,7 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
 
   def cleargrad() : Unit = this.grad = None
 
-  def bwd(retainGrad: Boolean = false): Unit = {
-    /**
-     * Backward Function
-     */
+  def bwd(retainGrad: Boolean = false, createGraph : Boolean  = false): Unit = {
     if (grad.isEmpty) grad = Some(DenseMatrix.ones[Double](data.rows, data.cols))
 
     var funcs: List[Function] = List()
@@ -48,7 +49,14 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
       val f = funcs.head
       funcs = funcs.tail
       val gys = f.outputs.map(_.grad.get)
-      val gxs = f.backward(gys: _*)
+      val gxsResults = if (Config.createGraph) {
+        f.backwardWithGraph(gys: _*)
+      } else {
+        f.backward(gys: _*)
+      }
+
+      // Ensure that gxsResults are of type Seq[DenseMatrix[Double]]
+      val gxs = gxsResults.map(gxResult => gxResult.asInstanceOf[DenseMatrix[Double]])
 
       for ((x, gx) <- f.inputs.zip(gxs)) {
         if (x.grad.isEmpty) x.grad = Some(gx)
@@ -58,6 +66,7 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
       }
     }
   }
+
 
   //  unchain backward
   def unchain(): Unit = this.creator = None

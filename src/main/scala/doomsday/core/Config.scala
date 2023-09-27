@@ -7,6 +7,7 @@ import scala.language.implicitConversions
 
 object Config {
   var enableBackprop = true
+  var createGraph = false
 }
 
 implicit def intToVar(i: Int): Var = new Var(DenseMatrix(i.toDouble))
