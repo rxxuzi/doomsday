@@ -1,9 +1,11 @@
 package doomsday.core
 
-import breeze.linalg._
-import doomsday.core._
+import breeze.linalg.*
+import doomsday.core.*
 import doomsday.core.Config
-import doomsday.function.{Function => F}
+import doomsday.function.Function as F
+
+import scala.annotation.targetName
 
 /**
  * 
@@ -99,3 +101,22 @@ final class Var(var data: DenseMatrix[Double], val name: Option[String] = None) 
 
 }
 
+object Var {
+  def apply(data: DenseMatrix[Double]): Var = new Var(data)
+  def apply(data: Double): Var = new Var(DenseMatrix(data))
+  def apply(data: Int) : Var = new Var(DenseMatrix(data.toDouble))
+  def apply(data: Double*): Var = new Var(DenseMatrix(data.toArray).t)
+
+  @targetName("applyDoubleTuple")
+  def apply(data: (Double, Double)*): Var = {
+    val rows = data.length
+    val cols = if (rows > 0) data.head.productArity else 0
+    val matrixData = Array.ofDim[Double](rows, cols)
+
+    for ((row, i) <- data.zipWithIndex) {
+      matrixData(i) = row.productIterator.map(_.asInstanceOf[Double]).toArray
+    }
+
+    new Var(DenseMatrix(matrixData: _*))
+  }
+}
